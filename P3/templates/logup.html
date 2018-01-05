@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/style/style_logup.css" />
+</head>
+
+<body>
+
+  <header>
+    <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/logo.png" alt="logo" />
+      </th>
+
+      <th style="width: 750px;">
+        <h1 class = "titulo"> Página de la práctica 3</h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan los ejercicios</h2>
+      </th>
+    </table>
+  </header>
+
+  <form class="logup-form" action="/signup" method = "post">
+    <div class="container">
+      <label><b>Nombre de usuario: </b></label>
+      <input type="text" placeholder="Introduzca nombre de usuario" name="username" value = "{{user}}" required>
+
+      <label><b>Nombre completo: </b></label>
+      <input type="text" placeholder="Introduzca el nombre completo" name="name" value = "{{name}}" required>
+
+      <label><b>Correo electrónico: </b></label>
+      <input type="text" placeholder="Introduzca el correo electrónico" name="mail"
+      value = "{{mail}}" required>
+
+      <label><b>Dirección: </b></label>
+      <input type="text" placeholder="Introduzca su dirección" name="address"  value = "{{address}}" required>
+
+
+      <label><b>Indique su género: </b></label><br>
+      {%if gender == "mujer"%}
+      <input type="radio" name="gender" value="hombre"> Hombre <br>
+      <input type="radio" name="gender" value="mujer" checked> Mujer <br>
+      {%else%}
+      <input type="radio" name="gender" value="hombre" checked> Hombre <br>
+      <input type="radio" name="gender" value="mujer"> Mujer <br>
+      {%endif%}
+
+      {%if error%}
+      <label style = "color : red;"><b > Las contraseñas introducidas no coinciden </b></label><br>
+      {%endif%}
+
+      <label><b>Contraseña: </b></label>
+      <input type="password" placeholder="Introduzca contraseña" name="password" required>
+      <label><b>Repite la contraseña: </b></label>
+      <input type="password" placeholder="Repite la contraseña" name="password-repeat" required>
+      <button type="submit" class="signupbtn" name = "bsubmit">Registrarse</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+
+</html>

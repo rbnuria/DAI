@@ -1,0 +1,41 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="../static/style/style.css" />-->
+    <title>{% block title %}User test{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="header">
+        {% block header %}
+        <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
+
+        {% if user.is_authenticated %}
+            {% trans "Logged in" %}: {{ user.username }} 
+            (<a href=<a href="{% url 'auth_logout' %}?next=/restaurantes/">{% trans "Log out" %}</a> | 
+            <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
+        {% else %}
+           <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
+        {% endif %}
+        <hr />
+        {% endblock %}
+        </div>
+
+        <div id="content">
+        {% block content %}{% endblock %}
+        </div>
+
+        <div id="footer">
+        {% block footer %}
+            <hr />
+        {% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>

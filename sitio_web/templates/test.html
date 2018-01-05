@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static  'style/style_probando.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>    
+
+    <script> 
+      $(document).ready(function(){
+        $("#change_colour_1").on('click',function(){
+            $("body").addClass("gris_1");
+            $("header").addClass("gris");
+            $("footer").addClass("gris");
+            $("nav").addClass("gris_2");
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('ul li:has(ul)').hover(function(e) {
+               $(this).find('ul').css({display: "block"});
+           },
+           function(e) {
+               $(this).find('ul').css({display: "none"});
+           });
+      });
+    </script>
+    
+    <script>
+      $(document).ready(function(){
+        $( "#clickme" ).click(function() {
+          $( "#circulo" ).animate({
+            cx: "800",
+            r: "200",
+            opacity: "0"
+          }, "slow");
+          $( "#circulo" ).animate({
+            cx: "100",
+            r: "50",
+            opacity: "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  </script>
+
+  <script>
+      $(document).ready(function(){
+        $( "#clickme2" ).click(function() {
+          $( "#circulo" ).animate({
+            cx : "800",
+            cy : "350",
+            opacity: "0.5"
+          }, "slow");
+
+          $( "#circulo" ).animate({
+            cx : "800",
+            cy : "50"
+          }, "slow");
+
+          $( "#circulo" ).animate({
+            cx : "100",
+            cy : "200",
+            opacity : "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  </script>
+
+    <script>
+      $(document).ready(function(){
+        $( "#clickme3" ).click(function() {
+          $( "#circulo" ).animate({
+            cx : "800",
+            opacity: "0.5"
+          }, "slow");
+
+          $("#circulo").attr({
+            "fill" : "white"
+          });
+
+          $( "#circulo" ).animate({
+            cx : "100",
+            opacity : "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  
+  </script>
+  
+
+  <script>
+    $(document).ready(function(){
+        $( "#degradado" ).click(function() {
+          $("body").css({background:'linear-gradient(gray,white,gray)'});
+        }); 
+      });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      num_pagina = 0;
+      $('.paginator').click(function() {     
+          var type = $(this).text();
+
+          if(type == "<"){
+            if(num_pagina > 0){
+              num_pagina = num_pagina - 1;
+            }
+          }else{
+            num_pagina = num_pagina + 1;
+          }
+     
+          $.get ("{%url 'getlist'%}",               
+            {pagina : num_pagina},        
+            function (data) { 
+  
+              var html_new = ""
+              for (var i in data){
+                html_new = html_new + "<tr class = 'mostrar'><td class = 'mostrar'>"+data[i].name +"</td><td class = 'mostrar'>"+data[i].address+"</td><td class = 'mostrar'>"+data[i].cuisine+"</td><td class='mostrar'> <a href='/restaurantes/change_restaurante/"+data[i].id+"'> Cambiar </a></td></tr>";
+              }
+
+
+              $("#myTable").html(html_new)
+            }
+         );
+      });
+      
+    });
+  </script>
+
+  <script>  
+    $(document).ready(function () {
+        $('#ajax1').click(function() {     
+          
+          $.get("{%url 'stadistic_ajax1'%}", function (datos) {
+            
+            var myChart = Highcharts.chart('container', {
+              chart: {
+                  type: 'column'
+              },
+              title: {
+                  text: 'Tipos de cocina en NewYork'
+              },
+               xAxis: {
+                  type: 'category',
+                  labels: {
+                      rotation: -45,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              },
+              yAxis: {
+                  min: 0,
+                  title: {
+                      text: 'Number of restaurants'
+                  }
+              },
+              series: [{
+                  name: 'Restaurantes',
+                  data: datos,
+                  dataLabels: {
+                      enabled: true,
+                      rotation: -90,
+                      color: '#FFFFFF',
+                      align: 'right',
+                      format: '{point.y:.1f}', // one decimal
+                      y: 10, // 10 pixels down from the top
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              }]
+          });
+          
+        });
+
+      });
+
+    });
+  </script>
+
+    <script>  
+    $(document).ready(function () {
+        $('#ajax2').click(function() {     
+          
+          $.get("{%url 'stadistic_ajax2'%}", function (datos) {
+            
+            var myChart = Highcharts.chart('container', {
+              chart: {
+                  type: 'column'
+              },
+              title: {
+                  text: 'Restaurantes por barrios de NewYork'
+              },
+               xAxis: {
+                  type: 'category',
+                  labels: {
+                      rotation: -45,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              },
+              yAxis: {
+                  min: 0,
+                  title: {
+                      text: 'Number of restaurants'
+                  }
+              },
+              series: [{
+                  name: 'Restaurantes',
+                  data: datos,
+                  dataLabels: {
+                      enabled: true,
+                      rotation: -90,
+                      color: '#FFFFFF',
+                      align: 'right',
+                      format: '{point.y:.1f}', // one decimal
+                      y: 10, // 10 pixels down from the top
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              }]
+          });
+          
+        });
+
+      });
+
+    });
+  </script>
+
+    
+    <style>
+      .gris{
+        background-color: slategrey; 
+      }
+
+      .gris_1{
+        background-color: #F8F9FA;
+      }
+
+      .gris_2{
+        background-color: #D4D9DE;
+      }
+
+      .rosa {
+        background-color: rosybrown;
+      }
+
+      .rosa_1{
+        background-color: #E6E6E6; 
+      }
+
+      .rosa_2{
+        background-color: mistyrose;
+      }
+
+      .letragrande{
+        font-size: 3em; 
+
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/django.png" alt="logo" />
+      </th>
+
+      <th style="width: 800px;">
+        <h1 class = "titulo"> RESTAURANTES </h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan las prácticas 6, 7, 8 y 9.</h2>
+      </th>
+
+      <th>
+        {% if user.is_authenticated%}
+          <form action="{% url 'auth_logout' %}?next=/restaurantes/">
+            <button class="btn btn-default btn-lg" type="submit">Log out</button>
+          </form>
+        {% else %}
+          <form action="{%url 'auth_login'%}">
+            <button class="btn btn-default btn-lg" type="submit">Log in</button>
+          </form>
+        {% endif %}
+      </th>
+
+      </table>
+    </header>
+
+
+    {% if ajax %}
+    <table style="width=1500px;">
+    <th style = "width:20px;  background-color: mistyrose; ">
+    {% endif %}
+
+     <nav>
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="#" id="change_colour_1">Gama de grises
+              </a>
+          </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="{%url 'animaciones' %}" id="change">Animaciones
+              </a>
+              <ul>
+                <li><a class="dropdown-item" href="#" id ="clickme">Opción 1</a></li>
+                <li><a class="dropdown-item" href="#" id = "clickme2">Opción 2</a></li>
+                <li><a class="dropdown-item" href="#" id = "clickme3">Opción 3</a></li>
+              </ul>
+          </li>
+      </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="#" id="degradado">Degradado
+            </a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="{%url 'pagination' %}">Paginación
+            </a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="{%url 'nuevo_restaurante' %}">Nuevo restaurante
+            </a>
+        </li>
+    </ul>
+
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="{%url 'map' %}">Mapa
+            </a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="{%url 'stadistic' %}">Estadísticas
+            </a>
+        </li>
+    </ul>
+
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+             <a class="dropdown-item" href="{%url 'ajax'%}" id="ajax">Estadísticas Ajax
+            </a>
+            <ul>
+              <li><a class="dropdown-item" href="#" id ="ajax1">Tipos de cocina</a></li>
+              <li><a class="dropdown-item" href="#" id = "ajax2">Barrios</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+    </nav>
+
+
+
+    {%if animaciones%}
+    <svg width="1000" height="400">
+      <circle id = "circulo" cx = "100" cy = "200" r = "50"  stroke = "black" stroke-width="2" fill = "salmon" opacity = "1">
+    </svg>
+    {%endif%}
+
+    
+    {%if data%}
+    <p> Búsqueda realizada: restaurantes en Manhattan </p>
+
+    <div style="text-align:center;">
+    <table class="mostrar paginated">
+      <thead>
+          <tr class="mostrar">
+            <th class="mostrar">Nombre</th>
+            <th class="mostrar">Calle</th>
+            <th class="mostrar">Tipo de cocina</th>
+            <th class="mostrar"> Opciones <th>
+          </tr>
+        
+        <tbody id="myTable">
+        {%for item in data%}
+          <tr class='mostrar'>
+              <td class='mostrar'>{{item.name}}</td>
+              <td class='mostrar'>{{item.address}}</td>
+              <td class='mostrar'>{{item.cuisine}}</td>
+              <td class='mostrar'> <a href="/restaurantes/change_restaurante/{{item.id}}"> Cambiar </a></td>
+          </tr>    
+        {%endfor%}
+        </tbody>
+
+      </thead>
+    </table>
+    </div>
+
+    <div style="text-align:center; margin-top: 30px; ">
+      <button class="btn paginator">&lt;</button>
+      <button class="btn paginator">&gt;</button>
+    </div>
+    {%endif%}
+
+    {%if ajax%}
+    </th>
+    <th style="width:1300px;">
+    <h1 style="text-align:center;"> Ajax Stadictics </h1>
+    <h3> Está usted en la sección de obtención de estadísticas con Ajax </h3>
+
+    <div id="container" style="width:100%; height:400px;">    <p> Elija qué gráfico desea en la barra lateral izquierda </p></div>
+    </th>
+    </table>
+    {%endif%}
+
+
+    <footer style = "margin-top: 0px;">Autor: Nuria Rodríguez Barroso</footer>
+
+  </body>
+</html>

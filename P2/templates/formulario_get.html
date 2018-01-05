@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Mandelbrot</title>
+    <style type="text/css">
+            body {background-color: #E6E6E6; margin: 0; padding: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #610B38} 
+            h3 {font-size: 2.7em; font-weight: 200; margin-top: 30px; text-align: center; letter-spacing: -1px;color: #999;}
+            div { margin: .7em 0;}
+            div label { width: 15%; float: left;}
+    </style>
+  </head>
+<H3 ALIGN=JUSTIFY> Introduzca los parámetros necesarios para la representación del Mandelbrot </H3>
+<form action="/mandelbrot" method="post">
+    <fieldset>
+    <div>
+    <label for="nombre">Valor para x1: </label>
+    <input type="text" id="nombre" name="x1" value="-1"><br/><br/>
+    </div>
+
+    <div>
+    <label for="nombre">Valor para y1: </label>
+    <input type="text" id="nombre" name="y1" value="-1"><br/><br/>
+    </div>
+
+    <div>
+    <label for="nombre">Valor para x2: </label>
+    <input type="text" id="nombre" name="x2" value="1"><br/><br/>
+    </div>
+
+    <div>
+    <label for="nombre">Valor para y2: </label>
+    <input type="text" id="nombre" name="y2" value="1"><br/><br/>
+    </div>
+
+    <div>
+    <label for="nombre">Valor para el ancho: </label>
+    <input type="text" id="nombre" name="ancho" value="800"><br/><br/>
+    </div>
+
+    <div>
+    <label for="nombre">Número de iteraciones: </label>
+    <input type="text" id="nombre" name="iteraciones" value="100"><br/><br/>
+    </div>
+
+    <input type="color" name="color1" value="#F5A9E1">
+    <input type="color" name="color2" value="#FA5882">
+    <input type="color" name="color3" value="#8A084B"><br/><br/>
+
+    <input type="submit" value="Enviar" /><br/><br/>
+
+
+    </fieldset>
+
+</form>
+</html>

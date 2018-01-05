@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style/style_probando.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script> 
+      $(document).ready(function(){
+        $("#change_colour_1").on('click',function(){
+            $("body").addClass("gris_1");
+            $("header").addClass("gris");
+            $("footer").addClass("gris");
+            $("nav").addClass("gris_2");
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('ul li:has(ul)').hover(function(e) {
+               $(this).find('ul').css({display: "block"});
+           },
+           function(e) {
+               $(this).find('ul').css({display: "none"});
+           });
+      });
+    </script>
+    
+    <script>
+      $(document).ready(function(){
+        $( "#clickme" ).click(function() {
+          $( "#circulo" ).animate({
+            cx: "800",
+            r: "200",
+            opacity: "0"
+          }, "slow");
+          $( "#circulo" ).animate({
+            cx: "100",
+            r: "50",
+            opacity: "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  </script>
+
+  <script>
+      $(document).ready(function(){
+        $( "#clickme2" ).click(function() {
+          $( "#circulo" ).animate({
+            cx : "800",
+            cy : "350",
+            opacity: "0.5"
+          }, "slow");
+
+          $( "#circulo" ).animate({
+            cx : "800",
+            cy : "50"
+          }, "slow");
+
+          $( "#circulo" ).animate({
+            cx : "100",
+            cy : "200",
+            opacity : "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  </script>
+
+    <script>
+      $(document).ready(function(){
+        $( "#clickme3" ).click(function() {
+          $( "#circulo" ).animate({
+            cx : "800",
+            opacity: "0.5"
+          }, "slow");
+
+          $("#circulo").attr({
+            "fill" : "white"
+          });
+
+          $( "#circulo" ).animate({
+            cx : "100",
+            opacity : "1"
+          }, "slow");
+          $( "#circulo" ).animate({
+            opacity: "0"
+          });
+        });
+      });
+  
+  </script>
+  
+
+  <script>
+    $(document).ready(function(){
+        $( "#degradado" ).click(function() {
+          $("body").css({background:'linear-gradient(gray,white,gray)'});
+        }); 
+      });
+  </script>
+
+
+
+  <script>
+    $(document).ready(function () {
+      num_pagina = 0;
+      $('.paginator').click(function() {     
+          var type = $(this).text();
+
+          if(type == "<"){
+            if(num_pagina > 0){
+              num_pagina = num_pagina - 1;
+            }
+          }else{
+            num_pagina = num_pagina + 1;
+          }
+     
+          $.get ('/getlist',               
+            {pagina : num_pagina},        
+            function (data) { 
+ 
+
+              var html_new = ""
+              for (var i in data){
+                html_new = html_new + "<tr class = 'mostrar'><td class = 'mostrar'>"+data[i].name +"</td><td class = 'mostrar'>"+data[i].address +"</td><td class = 'mostrar'>"+data[i].cuisine+"</td></tr>" ;
+              }
+
+              $("#myTable").html(html_new)
+            }
+         );
+      });
+      
+    });
+  </script>
+    
+    <style>
+      .gris{
+        background-color: slategrey; 
+      }
+
+      .gris_1{
+        background-color: #F8F9FA;
+      }
+
+      .gris_2{
+        background-color: #D4D9DE;
+      }
+
+      .rosa {
+        background-color: rosybrown;
+      }
+
+      .rosa_1{
+        background-color: #E6E6E6; 
+      }
+
+      .rosa_2{
+        background-color: mistyrose;
+      }
+
+      .letragrande{
+        font-size: 3em; 
+
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/logo.png" alt="logo" />
+      </th>
+
+      <th style="width: 600px;">
+        <h1 class = "titulo"> Página de la práctica 4 y 5</h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan los ejercicios</h2>
+      </th>
+      </table>
+    </header>
+
+    
+
+     <nav>
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="/database">Realizar búsqueda
+                <span class="sr-only">(current)</span>
+              </a>
+          </li>
+      </ul>
+      
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="#" id="change_colour_1">Gama de grises
+              </a>
+          </li>
+      </ul>
+
+      <!--<ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="nav-link" href="#" id="change_colour_2">Gama de rosas
+              </a>
+          </li>
+      </ul> -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="/animaciones" id="change">Animaciones
+              </a>
+              <ul>
+                <li><a class="dropdown-item" href="#" id ="clickme">Opción 1</a></li>
+                <li><a class="dropdown-item" href="#" id = "clickme2">Opción 2</a></li>
+                <li><a class="dropdown-item" href="#" id = "clickme3">Opción 3</a></li>
+              </ul>
+          </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="#" id="degradado">Degradado
+              </a>
+          </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+               <a class="dropdown-item" href="/pagination">Paginación
+              </a>
+          </li>
+      </ul>
+
+    </nav>
+
+
+    {%if rows%}
+    <p> Búsqueda realizada: restaurantes en Manhattan </p>
+
+    <div style="text-align:center;">
+      <table class = "mostrar">
+        <tr class="mostrar">
+          <th class="mostrar">Nombre</th>
+          <th class="mostrar">Calle</th>
+          <th class="mostrar">Tipo de cocina</th>
+        </tr>
+
+        {%for item in rows%}
+          <tr class="mostrar">
+              <td class="mostrar">{{item.name}}</td>
+              <td class="mostrar">{{item.address.street}}</td>
+              <td class="mostrar">{{item.cuisine}}</td>
+          </tr>    
+        {%endfor%}
+
+      </table>
+    </div>
+    {%endif%}
+
+
+    {%if animaciones%}
+    <svg width="1000" height="400">
+      <circle id = "circulo" cx = "100" cy = "200" r = "50"  stroke = "black" stroke-width="2" fill = "salmon" opacity = "1">
+    </svg>
+    {%endif%}
+
+    {%if data%}
+    <p> Búsqueda realizada: restaurantes en Manhattan </p>
+
+    <div style="text-align:center;">
+    <table class="mostrar paginated">
+      <thead>
+          <tr class="mostrar">
+            <th class="mostrar">Nombre</th>
+            <th class="mostrar">Calle</th>
+            <th class="mostrar">Tipo de cocina</th>
+          </tr>
+        
+        <tbody id="myTable">
+        {%for item in data[1:10]:%}
+          <tr class='mostrar'>
+              <td class='mostrar'>{{item.name}}</td>
+              <td class='mostrar'>{{item.address.street}}</td>
+              <td class='mostrar'>{{item.cuisine}}</td>
+          </tr>    
+        {%endfor%}
+        </tbody>
+
+      </thead>
+    </table>
+    </div>
+
+    <div style="text-align:center; margin-top: 30px; ">
+      <button class="btn paginator">&lt;</button>
+      <button class="btn paginator">&gt;</button>
+    </div>
+    {%endif%}
+
+    <form action="{% url 'nuevo_restaurante' %}" method="post">
+      <div class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Enviar" />
+      </div>
+    </form>
+
+    <footer style = "margin-top: 30px;">Autor: Nuria Rodríguez Barroso</footer>
+
+
+  </div>
+
+  </body>
+</html>

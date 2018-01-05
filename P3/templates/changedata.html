@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/style/style_logup.css" />
+</head>
+
+<body>
+
+  <header>
+    <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/logo.png" alt="logo" />
+      </th>
+
+      <th style="width: 750px;">
+        <h1 class = "titulo"> Página de la práctica 3</h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan los ejercicios</h2>
+      </th>
+    </table>
+  </header>
+
+  {%if user%}
+  <form class="logup-form" action="/changedata" method = "post">
+    <div class="container">
+      <h3> Datos de usuario para: {{user}}</h3>
+
+      <label><b>Nombre completo: </b></label>
+      <input type="text" placeholder="{{name}}" name="name" value = "{{name}}">
+
+      <label><b>Correo electrónico: </b></label>
+      <input type="text" placeholder="{{mail}}" name="mail" value = "{{mail}}">
+
+      <label><b>Dirección: </b></label>
+      <input type="text" placeholder="{{address}}" name="address" value = "{{address}}">
+
+      <label><b>Género: </b></label><br>
+      {%if gender == "hombre" %}
+      <input type="radio" name="gender" value="hombre" checked> Hombre <br>
+      <input type="radio" name="gender" value="mujer"> Mujer <br>
+      {%else%}
+      <input type="radio" name="gender" value="hombre"> Hombre <br>
+      <input type="radio" name="gender" value="mujer" checked> Mujer <br>
+      {%endif%}
+
+
+      <label><b>Nueva Contraseña: </b></label>
+      <input type="password" placeholder="Introduzca la nueva contraseña" name="new-password" value = "{{psw}}"><br>
+      <label><b>Contraseña antigua: </b></label>
+      <input type="password" placeholder="Introduzca la contraseña antigua" name="password"   required>
+      <button type="submit" class="signupbtn" name = "bsubmit">Modificar datos</button> <br>
+
+      {%if error%}
+      <label style = "color : red;"><b >La contraseña introducida es incorrecta</b></label><br>
+      {%endif%}
+
+      </div>
+    </div>
+  </form>
+  {%else%}
+    <h3> No hay datos de usuario que mostrar </h3>
+  {%endif%}
+
+</body>
+
+</html>

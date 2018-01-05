@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style/style_probando.css" />
+  </head>
+
+  <body>
+
+    <header>
+      <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/logo.png" alt="logo" />
+      </th>
+
+      <th style="width: 600px;">
+        <h1 class = "titulo"> Página de la práctica 3</h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan los ejercicios</h2>
+      </th>
+
+      <th style="width: 300px;">
+        {% if user %}
+          <div class ="user-logged">
+            <p>¡Bienvenid@, {{user}}!</p>
+            <p style = "color: black;"><a style = "color: black;" href="/logout">Cerrar sesión</a></p>
+          </div>
+        {% else %}
+          <form class = "form-logging" action = "/login" method = "post">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" name = "username">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="password" name = "password">
+            <button type="submit" style="color = black">Login</button>
+            {%if wrongpassword%}
+              <label style = "color:darkred;"><b>La contraseña introducida es incorrecta</b></label>
+            {%endif%}
+          </form>
+        {% endif %}
+      </th>
+      </table>
+    </header>
+
+
+     <nav>
+        <ul class="navbar-nav mr-auto">
+            {%if current == 1%}
+            <li class="nav-item active">
+                 <a class="nav-link" href="/enlace1">Enlace 1
+                  <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% else %}
+            <li class = "nav-item">
+               <a class="nav-link" href="/enlace1">Enlace 1</a>
+            </li> 
+            {% endif %}
+
+            {%if current == 2%}
+            <li class="nav-item active">
+                 <a class="nav-link" href="/enlace2">Enlace 2
+                  <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% else %}
+            <li class = "nav-item">
+               <a class="nav-link" href="/enlace2">Enlace 2</a>
+            </li> 
+            {% endif %}
+
+            {%if current == 3%}
+            <li class="nav-item active">
+                 <a class="nav-link" href="/enlace3">Enlace 3
+                  <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% else %}
+            <li class = "nav-item">
+               <a class="nav-link" href="/enlace3">Enlace 3</a>
+            </li> 
+            {% endif %}
+
+
+            {%if user%}
+            {%if current == 4%}
+            <li class="nav-item active">
+                 <a class="nav-link" href="/userdata">Enlace 4: Datos de usuario
+                  <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% else %}
+            <li class = "nav-item">
+               <a class="nav-link" href="/userdata">Enlace 4: Datos de usuario</a>
+            </li> 
+            {% endif %}
+            {%endif%}
+
+          </ul>
+      </nav>
+
+
+    <article>
+      {%if link%}
+      <h3>Has accedido al enlace {{link}}</h3>
+      {%endif%}
+      {%if last%}
+      <h3> Los enlaces anteriores accedidos son: <h3>
+      {%endif%}
+      {%for l in last%}
+        {%if l == "/enlace4"%}
+          <li><a href = "/userdata">/userdata</a></li>
+        {%else%}
+          <li><a href = "{{l}}">{{l}}</a></li>
+        {%endif%}
+      {%endfor%}
+    </article>
+
+    <footer>Autor: Nuria Rodríguez Barroso</footer>
+
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<form method="post" action="." style="max-width:500px;">
+  {% csrf_token %} 
+    
+  <p> Introduzca el nombre de usuario: </p>
+  <input type="text" name="username" id="id_username" class="form-control" required autofocus>
+  <br>
+
+  {% if form.username.errors %}
+    <ul>
+        {{ form.username.errors.as_ul }}
+    </ul>
+  {% endif %}
+
+  <p> Introduzca un e-mail válido: </p>
+  <input type="email" name="email" required id="email" class="form-control">
+
+    {% if form.email.errors %}
+    <ul>
+        {{ form.email.errors.as_ul }}
+    </ul>
+  {% endif %}
+
+  <p> Introduzca una contraseña: </p>
+  <input type="password" name="password1" id="id_password1" class="form-control"  required>
+    {% if form.password.errors %}
+    <ul>
+        {{ form.password.errors.as_ul }}
+    </ul>
+  {% endif %}
+
+  <p> Repita la contraseña para su verificación: </p>
+  <input type="password" name="password2" id="id_password2" class="form-control"  required>
+  <br>
+
+  {% if form.password2.errors %}
+    <ul>
+        {{ form.password2.errors.as_ul }}
+    </ul>
+  {% endif %}
+
+
+
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" value="{% trans 'Submit' %}" />Submit</button>
+</form>
+{% endblock %}

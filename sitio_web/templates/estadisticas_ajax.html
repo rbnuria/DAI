@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static  'style/style_probando.css' %}" />
+
+
+    <!--[if lt IE 9]>
+    <script src="https://code.highcharts.com/modules/oldie.js"></script>
+    <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Cargamos highcarts -->
+    <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>    
+    
+  </head>
+
+  <body>
+
+    <header>
+      <table>
+      <th style="width: 500px;">
+        <img class = "logo" src="/static/django.png" alt="logo" />
+      </th>
+
+      <th style="width: 800px;">
+        <h1 class = "titulo"> RESTAURANTES </h1>
+        <h2 class = "subtitulo"> Aquí se desarrollan las prácticas 6, 7, 8 y 9.</h2>
+      </th>
+
+      <th>
+        <form action="{% url 'index' %}?next=/restaurantes/">
+            <button class="btn btn-default btn-lg" type="submit">Home</button>
+        </form>
+      </th>
+
+      </table>
+    </header>
+
+
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    
+    <script type="text/javascript">
+      $(function () { 
+          var x_axis = []
+          var lista = {{lista | safe}}
+
+          for (item in lista) { 
+            x_axis.push(lista[item][0])
+          }
+
+          var myChart = Highcharts.chart('container', {
+              chart: {
+                  type: 'column'
+              },
+              title: {
+                  text: 'Tipos de cocina en NewYork'
+              },
+               xAxis: {
+                  type: 'category',
+                  labels: {
+                      rotation: -45,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              },
+              yAxis: {
+                  min: 0,
+                  title: {
+                      text: 'Number of restaurants'
+                  }
+              },
+              series: [{
+                  name: 'Restaurantes',
+                  data: {{lista|safe}},
+                  dataLabels: {
+                      enabled: true,
+                      rotation: -90,
+                      color: '#FFFFFF',
+                      align: 'right',
+                      format: '{point.y:.1f}', // one decimal
+                      y: 10, // 10 pixels down from the top
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif'
+                      }
+                  }
+              }]
+          });
+      });
+
+      var chart1; // globally available
+      $(function() {
+         chart1 = Highcharts.stockChart('container', {
+           rangeSelector: {
+              selected: 1
+           },
+           series: [{
+              name: 'USD to EUR',
+              data: usdtoeur // predefined JavaScript array
+           }]
+        });
+      });
+    </script>
+
+    <footer style = "margin-top: 30px;">Autor: Nuria Rodríguez Barroso</footer>
+
+
+  </div>
+
+  </body>
+</html>
